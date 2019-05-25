@@ -11,5 +11,5 @@ def loginpage(request):
                   context={})
 
 def registerpage(request):
-    return render(request=request, tempalate_name='memeapp/registerpage.html',
+    return render(request=request, template_name='memeapp/registerpage.html',
                   context={})

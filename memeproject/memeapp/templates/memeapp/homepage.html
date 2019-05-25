@@ -1,5 +1,104 @@
 {% extends './base.html'%}
 
 {% block content %}
-<h1>Hello world</h1>
+<div id="main_wrapper" class="container center" >
+ <!-- heading of the Meme genearator -->
+ <h1 style="margin-top:20px;color:#29b6f6"><xmp>/* MeMe Generator */</xmp></h1>
+ <hr style="height:3px;background-color:#29b6f6 ; border:none">
+<!-- canvas started here -->
+ <div class="canvas_container">
+ <canvas id="canvas" class="canvas_canvas" width="400px" height="400px" style="background-color:white"></canvas>
+ </div>
+ <!--canvas ended here
+ <input type="file" accept=".jpg .png .jpeg" id="choosefile">-->
+
+ <div>
+   <br>
+  <!-- input type  here -->
+  <input type="file" accept="img/*" id="imageinput" multiple="false">
+  <button class="btn waves-effect waves-light" id="generateimg" name="action">
+    Upload
+  </button>
+  <input type="text" class="center" placeholder="Enter Top Text" id="toptext" value="">&nbsp;
+  <!--<input type="range" id="fontsizetop" min="10" max="60" value="20" style="width:20% "onmousemove ="fontchange()"><br>
+  -->
+  <input type="text" class = "center" placeholder="Enter Bottom Text" id="bottomtext" value="">&nbsp;
+  <!--
+  <input type="range" id="fontsizebottom" min="10" max="60" value="20" style="width:20%" onmousemove ="fontchange()"><br>
+  -->
+  <button id="generatecanvas" class="btn">Generate</button>
+  <button type="submit" class="btn" onclick="download()">Download</button>
+
+</div>
+</div>
+
+<script>
+let canvas, context, toptext, bottomtext, generate, imageinput, generateCanvas;
+
+function init(){
+
+  canvas=document.getElementById("canvas");
+  context=canvas.getContext("2d");
+  toptext=document.getElementById('toptext');
+  bottomtext=document.getElementById('bottomtext');
+  imageinput=document.getElementById('imageinput');
+  generate=document.getElementById('generateimg');
+  generateCanvas = document.getElementById('generatecanvas');
+  generate.addEventListener('click', function () {
+
+    let reader = new FileReader();
+    reader.onload = function(){
+      let img = new Image;
+      img.src = reader.result;
+      generateimage(img);
+    };
+    reader.readAsDataURL(imageinput.files[0]);
+  });
+
+  generateCanvas.addEventListener('click', function () {
+
+      var x = toptext.value;
+     // var i = document.getElementById("fontsizetop").value;
+      let fontSize = canvas.width/15;
+      context.font = fontSize + "px Impact";
+      context.fillStyle = "white";
+      context.strokeStyle = "black";
+      context.lineWidth = fontSize/15;
+      context.textAlign = 'center';
+      context.textBaseLine = 'top';
+      context.fillText(x, canvas.width/2,40);
+
+
+      var y=bottomtext.value;
+      context.font= fontSize + "px Impact";
+      context.fillStyle ="white";
+      context.strokeStyle = "black";
+      context.lineWidth = fontSize/15;
+      context.textAlign = 'center';
+      context.textBaseLine = 'top';
+      context.fillText(y, canvas.width/2, canvas.height - 40);
+  });
+
+
+}
+
+  function generateimage(img){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(img,0,0, canvas.width, canvas.height);
+
+  }
+
+
+
+
+init();
+
+function download(){
+  var link = document.createElement('a');
+  link.download = 'memegenerator.png';
+  link.href = document.getElementById('canvas').toDataURL()
+  link.click();
+}
+
+</script>
 {% endblock %}

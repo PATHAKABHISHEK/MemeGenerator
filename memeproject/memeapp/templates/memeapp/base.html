@@ -9,11 +9,35 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <style>
+
+      #main_wrapper{
+        width:750px;
+        height:800px;
+        background-color:#ffebee;
+        opacity:0.7;
+        margin-top:40px;
+        border:2px;
+        border-radius:30px;
+      }
+
+      nav{
+        background-color: #1a237e;
+      }
+
+      body {
+        background-color: #5e35b1;
+      }
+
+    </style>
   </head>
   <body>
     <nav>
       <div class="nav-wrapper">
-        <a href="{% url 'memeapp:homepage' %}" class="brand-logo">Meme Generator</a>
+        <a href="{% url 'memeapp:homepage' %}" class="brand-logo" style="font-family:'Permanent Marker',cursive;">Meme Generator</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="{% url 'memeapp:loginpage' %}">Login</a></li>
           <li><a href="{% url 'memeapp:registerpage' %}">Register</a></li>

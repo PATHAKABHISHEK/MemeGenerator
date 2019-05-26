@@ -21,5 +21,6 @@ app_name = 'memeapp'
 urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('register/', views.registerpage, name='registerpage'),
-    path('login/', views.loginpage, name='loginpage')
+    path('login/', views.loginpage, name='loginpage'),
+    path('logout/', views.logoutpage, name='logoutpage')
 ]

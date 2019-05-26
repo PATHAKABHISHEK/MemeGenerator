@@ -39,8 +39,16 @@
       <div class="nav-wrapper">
         <a href="{% url 'memeapp:homepage' %}" class="brand-logo" style="font-family:'Permanent Marker',cursive;">Meme Generator</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'memeapp:homepage' %}">Dashboard</a></li>
+          <li><a href="{% url 'memeapp:homepage' %}">{{user.username}}</a></li>
+          <li><a href="{% url 'memeapp:logoutpage' %}">Logout</a></li>
+          {% else %}
           <li><a href="{% url 'memeapp:loginpage' %}">Login</a></li>
           <li><a href="{% url 'memeapp:registerpage' %}">Register</a></li>
+          {% endif %}
+
         </ul>
       </div>
     </nav>
